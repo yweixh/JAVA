@@ -36,23 +36,23 @@ public class Graphics extends JPanel implements ActionListener {
                 if (isMoving) {
                     switch (e.getKeyCode()) {
                         case KeyEvent.VK_LEFT:
-                            if (direction != 'D') {
-                                direction = 'A';
+                            if (direction != 'R') {
+                                direction = 'L';
                             }
                             break;
                         case KeyEvent.VK_RIGHT:
-                            if (direction != 'A') {
-                                direction = 'D';
+                            if (direction != 'L') {
+                                direction = 'R';
                             }
                             break;
                         case KeyEvent.VK_UP:
-                            if (direction != 'S') {
-                                direction = 'W';
+                            if (direction != 'D') {
+                                direction = 'U';
                             }
                             break;
                         case KeyEvent.VK_DOWN:
-                            if (direction != 'W') {
-                                direction = 'S';
+                            if (direction != 'U') {
+                                direction = 'D';
                             }
                             break;
                     }
@@ -70,7 +70,7 @@ public class Graphics extends JPanel implements ActionListener {
         snakePosY = new int[border_size];
         snakeLength = 5;
         foodEaten = 0;
-        direction = 'R';
+        direction = 'D';
         isMoving = true;
         spawnFood();
         timer.start();
@@ -109,16 +109,16 @@ public class Graphics extends JPanel implements ActionListener {
             case 'D' -> snakePosY[0] += TICK_SIZE;
             case 'L' -> snakePosX[0] -= TICK_SIZE;
             case 'R' -> snakePosX[0] += TICK_SIZE; */
-            case 'W':
+            case 'U':
                 snakePosY[0] -= TICK_SIZE;
                 break;
-            case 'S':
+            case 'D':
                 snakePosY[0] += TICK_SIZE;
                 break;
-            case 'A':
+            case 'L':
                 snakePosX[0] -= TICK_SIZE;
                 break;
-            case 'D':
+            case 'R':
                 snakePosX[0] += TICK_SIZE;
                 break;
         }
