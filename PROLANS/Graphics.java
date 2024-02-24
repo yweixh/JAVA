@@ -11,12 +11,12 @@ public class Graphics extends JPanel implements ActionListener {
     static final int WIDTH = 650;
     static final int HEIGHT = 650;
     static final int TICK_SIZE = 30;
-    static final int BOARD_SIZE = (WIDTH * HEIGHT) / (TICK_SIZE * TICK_SIZE);
+    static final int border_size = (WIDTH * HEIGHT) / (TICK_SIZE * TICK_SIZE);
 
     final Font font = new Font("Arial", Font.BOLD, 30);
 
-    int[] snakePosX = new int[BOARD_SIZE];
-    int[] snakePosY = new int[BOARD_SIZE];
+    int[] snakePosX = new int[border_size];
+    int[] snakePosY = new int[border_size];
     int snakeLength;
 
     Food food;
@@ -36,23 +36,23 @@ public class Graphics extends JPanel implements ActionListener {
                 if (isMoving) {
                     switch (e.getKeyCode()) {
                         case KeyEvent.VK_LEFT:
-                            if (direction != 'R') {
-                                direction = 'L';
+                            if (direction != 'D') {
+                                direction = 'A';
                             }
                             break;
                         case KeyEvent.VK_RIGHT:
-                            if (direction != 'L') {
-                                direction = 'R';
+                            if (direction != 'A') {
+                                direction = 'D';
                             }
                             break;
                         case KeyEvent.VK_UP:
-                            if (direction != 'D') {
-                                direction = 'U';
+                            if (direction != 'S') {
+                                direction = 'W';
                             }
                             break;
                         case KeyEvent.VK_DOWN:
-                            if (direction != 'U') {
-                                direction = 'D';
+                            if (direction != 'W') {
+                                direction = 'S';
                             }
                             break;
                     }
@@ -66,8 +66,8 @@ public class Graphics extends JPanel implements ActionListener {
     }
 
     protected void start() {
-        snakePosX = new int[BOARD_SIZE];
-        snakePosY = new int[BOARD_SIZE];
+        snakePosX = new int[border_size];
+        snakePosY = new int[border_size];
         snakeLength = 5;
         foodEaten = 0;
         direction = 'R';
@@ -109,16 +109,16 @@ public class Graphics extends JPanel implements ActionListener {
             case 'D' -> snakePosY[0] += TICK_SIZE;
             case 'L' -> snakePosX[0] -= TICK_SIZE;
             case 'R' -> snakePosX[0] += TICK_SIZE; */
-            case 'U':
+            case 'W':
                 snakePosY[0] -= TICK_SIZE;
                 break;
-            case 'D':
+            case 'S':
                 snakePosY[0] += TICK_SIZE;
                 break;
-            case 'L':
+            case 'A':
                 snakePosX[0] -= TICK_SIZE;
                 break;
-            case 'R':
+            case 'D':
                 snakePosX[0] += TICK_SIZE;
                 break;
         }
@@ -136,7 +136,7 @@ public class Graphics extends JPanel implements ActionListener {
         }
     }
 
-    protected void collisionTest() {
+    protected void collisionTests() {
         for (int i = snakeLength; i > 0; i--) {
             if ((snakePosX[0] == snakePosX[i]) && (snakePosY[0] == snakePosY[i])) {
                 isMoving = false;
@@ -157,7 +157,7 @@ public class Graphics extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (isMoving) {
             move();
-            collisionTest();
+            collisionTests();
             eatFood();
         }
 
